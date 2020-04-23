@@ -443,7 +443,7 @@ class WebviewManager {
         }
 
         this.mCookieList = cookieList;
-        setCookie(url);
+        // setCookie(url);
 
         if (headers != null) {
             webView.loadUrl(url, headers);
