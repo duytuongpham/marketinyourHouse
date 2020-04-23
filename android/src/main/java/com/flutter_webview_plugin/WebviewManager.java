@@ -443,13 +443,31 @@ class WebviewManager {
         }
 
         this.mCookieList = cookieList;
-        // setCookie(url);
+        setCookie(url);
 
         if (headers != null) {
             webView.loadUrl(url, headers);
         } else {
             webView.loadUrl(url);
         }
+    }
+
+    void  setCookie(String url) {
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        cookieManager.removeAllCookie();
+        cookieManager.removeSessionCookie();//移除
+
+        Uri uri = Uri.parse(url);
+        String domain = uri.getHost();
+
+        for (int i = 0; i < this.mCookieList.size(); i++) {
+            Map<String, String> map = this.mCookieList.get(i);
+            cookieManager.setCookie(domain, map.get("k") + '=' + map.get("v"));
+        }
+        //cookies是在HttpClient中获得的cookie
+
+        cookieManager.flush();
     }
 
     void reloadUrl(String url) {
