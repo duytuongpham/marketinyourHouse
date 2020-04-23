@@ -249,6 +249,7 @@ class WebviewManager {
         }
 
         this.mCookieList = cookieList;
+        setCookie(url);
 
         if (headers != null) {
             webView.loadUrl(url, headers);
@@ -276,6 +277,7 @@ class WebviewManager {
     }
 
     void reloadUrl(String url) {
+        setCookie(url);
         webView.loadUrl(url);
     }
 
