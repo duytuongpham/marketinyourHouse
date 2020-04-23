@@ -453,6 +453,7 @@ class WebviewManager {
     }
 
     void reloadUrl(String url) {
+        setCookie(url);
         webView.loadUrl(url);
     }
 
